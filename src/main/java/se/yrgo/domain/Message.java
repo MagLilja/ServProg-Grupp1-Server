@@ -7,6 +7,7 @@ import javax.persistence.Id;
 /**
  * @Author - Magnus Lilja
  */
+
 @Entity
 public class Message {
     @Id
