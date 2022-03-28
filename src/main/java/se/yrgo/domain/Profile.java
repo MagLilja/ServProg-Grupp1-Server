@@ -15,11 +15,15 @@ public class Profile {
     int id;
     String userName;
     String firstName;
-    @OneToMany
-    List<Message> messages;
+//    @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
+//    List<Message> messages;
 
     public Profile() {
     }
+
+//    public void addMessage(Message message){
+//        messages.add(message);
+//    }
 
     public int getId() {
         return id;
@@ -44,12 +48,12 @@ public class Profile {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
+//
+//    public List<Message> getMessages() {
+//        return messages;
+//    }
+//
+//    public void setMessages(List<Message> messages) {
+//        this.messages = messages;
+//    }
 }

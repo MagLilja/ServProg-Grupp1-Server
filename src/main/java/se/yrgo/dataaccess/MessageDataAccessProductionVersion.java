@@ -20,10 +20,10 @@ public class MessageDataAccessProductionVersion implements MessageDataAccess {
     private EntityManager em;
     @Override
     public void insert(Message newMessage) {
-
+//        var profile = em.find(Profile.class, newMessage.getAuthor());
+//        profile.addMessage(newMessage);
         em.persist(newMessage);
     }
-
     @Override
     public List<Message> findAll() {
         TypedQuery<Message> query = em.createQuery("select message from Message message", Message.class);

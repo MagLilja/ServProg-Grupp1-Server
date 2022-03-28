@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKey;
 
@@ -15,9 +16,15 @@ import javax.persistence.MapKey;
 public class Message {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    int id;
-    String textBody;
-
+    private int id;
+    private String textBody;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "profile_id")
+//    private Profile author;
+    @ManyToOne
+    @JoinColumn(name = "profile_fk")
+    private Profile author;
 
     public Message() {
     }
@@ -38,5 +45,11 @@ public class Message {
         this.textBody = textBody;
     }
 
+    public void setAuthor(Profile author) {
+        this.author = author;
+    }
 
+    public Profile getAuthor() {
+        return author;
+    }
 }
