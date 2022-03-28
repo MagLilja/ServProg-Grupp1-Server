@@ -14,7 +14,7 @@
 </properties>
 <build>
 
-<finalName>EmployeeManagementServerApplication</finalName>
+<finalName>Grupp1ServerApplication</finalName>
 <plugins>
     <plugin>
         <artifactId>maven-war-plugin</artifactId>
@@ -38,7 +38,6 @@
                     </includes>
                 </resource>
             </webResources>
-
         </configuration>
     </plugin>
     <plugin>
