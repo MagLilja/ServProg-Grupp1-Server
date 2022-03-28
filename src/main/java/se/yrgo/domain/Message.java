@@ -4,16 +4,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapKey;
+
 /**
  * @Author - Magnus Lilja
  */
+
 @Entity
 public class Message {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     int id;
     String textBody;
-    Profile author;
+
 
     public Message() {
     }
@@ -34,11 +38,5 @@ public class Message {
         this.textBody = textBody;
     }
 
-    public Profile getAuthor() {
-        return author;
-    }
 
-    public void setAuthor(Profile author) {
-        this.author = author;
-    }
 }

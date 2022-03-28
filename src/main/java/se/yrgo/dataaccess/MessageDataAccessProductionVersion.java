@@ -20,7 +20,8 @@ public class MessageDataAccessProductionVersion implements MessageDataAccess {
     private EntityManager em;
     @Override
     public void insert(Message newMessage) {
-            em.persist(newMessage);
+
+        em.persist(newMessage);
     }
 
     @Override

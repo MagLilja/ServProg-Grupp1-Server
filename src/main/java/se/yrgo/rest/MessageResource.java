@@ -23,28 +23,27 @@ import java.util.List;
 @Consumes("application/JSON")
 public class MessageResource {
 
-	@Inject
-	private MessageManagementService service;
-	
-	@GET
-	public List<Message> getAllEmployees() {
-		 return service.getAllMessages();
-	}
+    @Inject
+    private MessageManagementService service;
 
-	@GET
-	@Path("{employeeNo}")
-	public Message findEmployeeById(@PathParam("employeeNo") int id) {
-		return service.getById(id);
-	}
+    @GET
+    public List<Message> getAllMessages() {
+        return service.getAllMessages();
+    }
 
-	@POST
-	@Produces("application/JSON")
-	@Consumes("application/JSON")
-	public Message createEmployee(Message message) {
-		service.registerMessage(message);
-		return message;
-	}
+    @GET
+    @Path("{employeeNo}")
+    public Message findEmployeeById(@PathParam("employeeNo") int id) {
+        return service.getById(id);
+    }
 
-	
+    @POST
+    @Produces("application/JSON")
+    @Consumes("application/JSON")
+    public Message createEmployee(Message message) {
+        service.registerMessage(message);
+        return message;
+    }
+
 
 }
