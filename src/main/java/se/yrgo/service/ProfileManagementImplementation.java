@@ -6,6 +6,7 @@ import se.yrgo.domain.Profile;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
+
 /**
  * @Author - Magnus Lilja
  */

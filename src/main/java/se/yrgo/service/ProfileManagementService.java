@@ -15,5 +15,13 @@ public interface ProfileManagementService {
 
     public List<Profile> getAllProfiles();
 
-	public Message getById(int id);
+    public Profile getById(int id);
+
+    public Profile getProfileByFirstName();
+
+    public List<Profile> getProfilesByFirstNameAndLastName();
+
+    public List<Profile> getProfilesByQuery(String firstName, String lastName);
+
+    public void deleteProfileById(int id);
 }

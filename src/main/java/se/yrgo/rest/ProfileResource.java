@@ -5,7 +5,9 @@ import se.yrgo.service.ProfileManagementService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.resource.spi.IllegalStateException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -84,6 +86,20 @@ public class ProfileResource {
         }
         service.registerProfile(profile);
         return Response.status(Response.Status.ACCEPTED).entity(profile).build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    public void deleteProfileById(@PathParam("id") int id) {
+        service.deleteProfileById(id);
+    }
+
+
+    @PUT
+    @Path("{id}")
+    public Response updateProfile(@PathParam("id") int id) {
+        // TODO
+        return Response.status(Response.Status.ACCEPTED).entity("ID " + id + " updated.").build();
     }
 
 }
