@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 /**
- * @Author - Magnus Lilja
+ * @author - Magnus Lilja
  */
 @Stateless
 public class ProfileManagementImplementation implements ProfileManagementService {
@@ -32,16 +32,6 @@ public class ProfileManagementImplementation implements ProfileManagementService
     }
 
     @Override
-    public Profile getProfileByFirstName() {
-        return null;
-    }
-
-    @Override
-    public List<Profile> getProfilesByFirstNameAndLastName() {
-        return null;
-    }
-
-    @Override
     public List<Profile> getProfilesByQuery(String firstName, String lastName) {
         return dao.getProfilesByQuery(firstName, lastName);
     }
@@ -49,6 +39,11 @@ public class ProfileManagementImplementation implements ProfileManagementService
     @Override
     public void deleteProfileById(int id) {
         dao.deleteProfileById(id);
+    }
+
+    @Override
+    public void updateProfile() {
+        dao.updateProfile();
     }
 
 

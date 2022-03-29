@@ -6,22 +6,21 @@ import javax.ejb.Local;
 import java.util.List;
 
 /**
- * @Author - Magnus Lilja
+ * @author - Magnus Lilja
  */
 
 @Local
 public interface ProfileManagementService {
-    public void registerProfile(Profile profile);
 
-    public List<Profile> getAllProfiles();
+     void registerProfile(Profile profile);
 
-    public Profile getById(int id);
+     List<Profile> getAllProfiles();
 
-    public Profile getProfileByFirstName();
+     Profile getById(int id);
 
-    public List<Profile> getProfilesByFirstNameAndLastName();
+     List<Profile> getProfilesByQuery(String firstName, String lastName);
 
-    public List<Profile> getProfilesByQuery(String firstName, String lastName);
+     void deleteProfileById(int id);
 
-    public void deleteProfileById(int id);
+     void updateProfile();
 }

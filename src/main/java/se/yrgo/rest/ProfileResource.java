@@ -20,8 +20,8 @@ import java.util.List;
 /**
  * REST resource class for a social media profile
  *
- * @Author - Andreas Karlsson
- * @Author - Magnus Lilja
+ * @author  - Andreas Karlsson
+ * @author - Magnus Lilja
  */
 @Stateless
 @Path("/profiles")
@@ -50,7 +50,7 @@ public class ProfileResource {
      * or /search?lastname=lastName
      * or /search?lastname=lastName&firstname=firstName
      * @param firstName - Query parameter from the URI
-     * @param lastName
+     * @param lastName - Query parameter from the URI
      * @return a list of profiles with first- and/or lastnames containing the search params
      */
     @GET
@@ -88,7 +88,7 @@ public class ProfileResource {
      * Accepts a JSON string matching the Profile class
      * If lastname, firstname or username is missing it returns a BAD REQUEST
      * @param newProfile - the profile to be created
-     * @return
+     * @return a response with the added profile
      */
     @POST
     public Response createProfile(Profile newProfile) {
@@ -113,6 +113,7 @@ public class ProfileResource {
     @Path("{id}")
     public Response updateProfile(@PathParam("id") int id) {
         // TODO
+        service.updateProfile();
         return Response.status(Response.Status.ACCEPTED).entity("ID " + id + " updated.").build();
     }
 

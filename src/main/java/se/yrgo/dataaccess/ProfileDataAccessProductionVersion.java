@@ -11,7 +11,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * @Author - Magnus Lilja
+ * @author - Magnus Lilja
  */
 @Stateless
 @Default
@@ -31,12 +31,6 @@ public class ProfileDataAccessProductionVersion implements ProfileDataAccess {
     }
 
     @Override
-    public List<Profile> findByAuthor(Profile author) {
-        return null;
-    }
-
-
-    @Override
     public Profile findById(int id) {
         Query q = em.createQuery("select profile from Profile profile where profile.id = :id");
         q.setParameter("id", id);
@@ -53,7 +47,7 @@ public class ProfileDataAccessProductionVersion implements ProfileDataAccess {
             TypedQuery<Profile> query = em.createQuery("select profile from Profile profile WHERE profile.lastName like :lastname", Profile.class);
             query.setParameter("lastname", "%" + lastName + "%");
             return query.getResultList();
-        } else if (firstName != null && lastName != null) {
+        } else if (firstName != null) {
             TypedQuery<Profile> query = em.createQuery("select profile from Profile profile WHERE profile.lastName like :lastname AND profile.firstName like :firstname", Profile.class);
             query.setParameter("lastname", "%" + lastName + "%");
             query.setParameter("firstname", "%" + firstName + "%");
@@ -67,5 +61,10 @@ public class ProfileDataAccessProductionVersion implements ProfileDataAccess {
     public void deleteProfileById(int id) {
         Profile profile = em.find(Profile.class, id);
         em.remove(profile);
+    }
+
+    @Override
+    public void updateProfile() {
+        // TODO
     }
 }

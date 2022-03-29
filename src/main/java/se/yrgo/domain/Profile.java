@@ -15,7 +15,9 @@ public class Profile {
     private String firstName;
     private String lastName;
 
+
     public Profile() {
+        // Empty constructor needed for JPA
     }
 
     public int getId() {
