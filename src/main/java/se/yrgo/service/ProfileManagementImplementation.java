@@ -14,20 +14,21 @@ import java.util.List;
 @Stateless
 public class ProfileManagementImplementation implements ProfileManagementService {
 
+    private ProfileManagementValidator validator = new ProfileManagementValidator(this);
     @Inject
     private ProfileDataAccess dao;
 
     @Override
     public void registerProfile(Profile profile) throws ProfileUserNameAlreadyExistsException {
-        boolean hasUserName = dao.findAll().stream()
-                .map(p -> p.getUserName())
-                .anyMatch(username -> username.equals(profile.getUserName()));
-        System.out.println(hasUserName);
-        if (hasUserName) {
+        if (validator.validateUserName(profile)) {
             throw new ProfileUserNameAlreadyExistsException();
         } else {
             dao.insert(profile);
         }
+    }
+
+    public ProfileDataAccess getDao() {
+        return dao;
     }
 
     @Override
@@ -51,8 +52,8 @@ public class ProfileManagementImplementation implements ProfileManagementService
     }
 
     @Override
-    public void updateProfile() {
-        dao.updateProfile();
+    public void updateProfile(int id, Profile profile) throws ProfileNotFoundException {
+        dao.updateProfile(id, profile);
     }
 
     @Override

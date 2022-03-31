@@ -137,9 +137,13 @@ public class ProfileResource {
 
     @PUT
     @Path("{id}")
-    public Response updateProfile(@PathParam("id") int id) {
+    public Response updateProfile(@PathParam("id") int id, Profile profile) {
         // TODO
-        service.updateProfile();
+        try {
+            service.updateProfile(id, profile);
+        } catch (ProfileNotFoundException e) {
+            e.printStackTrace();
+        }
         return Response.status(Response.Status.ACCEPTED).entity("ID " + id + " updated.").build();
     }
 

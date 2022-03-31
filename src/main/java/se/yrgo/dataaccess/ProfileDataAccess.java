@@ -23,7 +23,7 @@ public interface ProfileDataAccess {
 
     void deleteProfileById(int id);
 
-    void updateProfile();
+    void updateProfile(int id, Profile profile) throws ProfileNotFoundException;
 
     Profile getProfileByUsername(String userName) throws ProfileNotFoundException;
 }
