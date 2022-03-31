@@ -1,7 +1,9 @@
 package se.yrgo.rest;
 
+import se.yrgo.dataaccess.ProfileNotFoundException;
 import se.yrgo.domain.Profile;
 import se.yrgo.service.ProfileManagementService;
+import se.yrgo.service.ProfileUserNameAlreadyExistsException;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -20,7 +22,7 @@ import java.util.List;
 /**
  * REST resource class for a social media profile
  *
- * @author  - Andreas Karlsson
+ * @author - Andreas Karlsson
  * @author - Magnus Lilja
  */
 @Stateless
@@ -37,6 +39,7 @@ public class ProfileResource {
 
     /**
      * The base GET resource.
+     *
      * @return a list of all profiles in the database
      */
     @GET
@@ -49,8 +52,9 @@ public class ProfileResource {
      * /search?firstname=firstName
      * or /search?lastname=lastName
      * or /search?lastname=lastName&firstname=firstName
+     *
      * @param firstName - Query parameter from the URI
-     * @param lastName - Query parameter from the URI
+     * @param lastName  - Query parameter from the URI
      * @return a list of profiles with first- and/or lastnames containing the search params
      */
     @GET
@@ -62,31 +66,46 @@ public class ProfileResource {
 
     /**
      * GET resource for getting a profile by ID
+     *
      * @param id - the id of the profile
      * @return a profile matching the id.
      */
     @GET
     @Path("{id}")
-    public Profile findProfileById(@PathParam("id") int id) {
-        return service.getById(id);
+    public Response findProfileById(@PathParam("id") int id) {
+        try {
+            Profile result = service.getById(id);
+            return Response.ok(result).build();
+        } catch (ProfileNotFoundException e) {
+            e.printStackTrace();
+            return Response.status(404).build();
+        }
+
     }
 
     /**
      * GET resource for getting a profile by the unique username
+     *
      * @param userName - the username of the profile
      * @return a profile matching the username.
      */
     @GET
-    @Path("{username}")
-    public Profile findProfileByUsername(@PathParam("username") int userName) {
-        // TODO
-        return null;
+    @Path("/username/{username}")
+    public Response findProfileByUsername(@PathParam("username") String userName) {
+        try {
+            Profile profileByUsername = service.getProfileByUsername(userName);
+            return Response.ok(profileByUsername).build();
+        } catch (ProfileNotFoundException e) {
+            e.printStackTrace();
+            return Response.status(404).build();
+        }
     }
 
     /**
      * POST resource for creating a new profile in the database
      * Accepts a JSON string matching the Profile class
      * If lastname, firstname or username is missing it returns a BAD REQUEST
+     *
      * @param newProfile - the profile to be created
      * @return a response with the added profile
      */
@@ -95,17 +114,24 @@ public class ProfileResource {
         if (newProfile.getLastName() == null || newProfile.getFirstName() == null || newProfile.getUserName() == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Status: 400 Bad Request - Required Fields Missing").build();
         }
-        service.registerProfile(newProfile);
+        try {
+            service.registerProfile(newProfile);
+        } catch (ProfileUserNameAlreadyExistsException e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.BAD_REQUEST).entity("Status: 400 Bad Request - UserName Already In Use.").build();
+        }
         return Response.status(Response.Status.ACCEPTED).entity(newProfile).build();
     }
 
     /**
      * DELETE resource to remove a profile from the database.
+     *
      * @param id -
      */
     @DELETE
     @Path("{id}")
     public void deleteProfileById(@PathParam("id") int id) {
+
         service.deleteProfileById(id);
     }
 

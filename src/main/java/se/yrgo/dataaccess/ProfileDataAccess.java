@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * @author - Magnus Lilja
+ *
  */
 @Local
 public interface ProfileDataAccess {
@@ -16,11 +17,13 @@ public interface ProfileDataAccess {
 
     List<Profile> findAll();
 
-    Profile findById(int id);
+    Profile findById(int id) throws ProfileNotFoundException;
 
     List<Profile> getProfilesByQuery(String firstName, String lastName);
 
     void deleteProfileById(int id);
 
     void updateProfile();
+
+    Profile getProfileByUsername(String userName) throws ProfileNotFoundException;
 }

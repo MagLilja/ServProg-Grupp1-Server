@@ -1,5 +1,6 @@
 package se.yrgo.service;
 
+import se.yrgo.dataaccess.ProfileNotFoundException;
 import se.yrgo.domain.Profile;
 
 import javax.ejb.Local;
@@ -12,15 +13,17 @@ import java.util.List;
 @Local
 public interface ProfileManagementService {
 
-     void registerProfile(Profile profile);
+     void registerProfile(Profile profile) throws ProfileUserNameAlreadyExistsException;
 
      List<Profile> getAllProfiles();
 
-     Profile getById(int id);
+     Profile getById(int id) throws ProfileNotFoundException;
 
      List<Profile> getProfilesByQuery(String firstName, String lastName);
 
      void deleteProfileById(int id);
 
      void updateProfile();
+
+     Profile getProfileByUsername(String userName) throws ProfileNotFoundException;
 }

@@ -5,6 +5,7 @@ import se.yrgo.domain.Profile;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -31,10 +32,15 @@ public class ProfileDataAccessProductionVersion implements ProfileDataAccess {
     }
 
     @Override
-    public Profile findById(int id) {
-        Query q = em.createQuery("select profile from Profile profile where profile.id = :id");
-        q.setParameter("id", id);
-        return (Profile) q.getSingleResult();
+    public Profile findById(int id) throws ProfileNotFoundException {
+        try {
+            Query q = em.createQuery("select profile from Profile profile where profile.id = :id");
+            q.setParameter("id", id);
+            return (Profile) q.getSingleResult();
+        } catch (NoResultException ex) {
+            throw new ProfileNotFoundException();
+        }
+
     }
 
     @Override
@@ -66,5 +72,16 @@ public class ProfileDataAccessProductionVersion implements ProfileDataAccess {
     @Override
     public void updateProfile() {
         // TODO
+    }
+
+    @Override
+    public Profile getProfileByUsername(String userName) throws ProfileNotFoundException {
+        try {
+            Query q = em.createQuery("select profile from Profile profile where profile.userName = :userName");
+            q.setParameter("userName", userName);
+            return (Profile) q.getSingleResult();
+        } catch (NoResultException ex) {
+            throw new ProfileNotFoundException();
+        }
     }
 }
