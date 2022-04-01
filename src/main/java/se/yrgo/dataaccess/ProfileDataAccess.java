@@ -6,14 +6,15 @@ import javax.ejb.Local;
 import java.util.List;
 
 /**
- * @author - Magnus Lilja
+ * Interface for DAO
  *
+ * @author - Magnus Lilja
+ * @author - Andreas Karlsson
  */
 @Local
 public interface ProfileDataAccess {
 
     void insert(Profile newProfile);
-
 
     List<Profile> findAll();
 

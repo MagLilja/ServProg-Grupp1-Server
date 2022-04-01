@@ -40,7 +40,6 @@ public class ProfileDataAccessProductionVersion implements ProfileDataAccess {
         } catch (NoResultException ex) {
             throw new ProfileNotFoundException();
         }
-
     }
 
     @Override
@@ -71,15 +70,14 @@ public class ProfileDataAccessProductionVersion implements ProfileDataAccess {
 
     @Override
     public void updateProfile(int id, Profile profile) throws ProfileNotFoundException {
-        // TODO
         Profile profileDB = findById(id);
         profileDB.setFirstName(profile.getFirstName());
         profileDB.setLastName(profile.getLastName());
-//        profileDB.getUserName()
-
-
+        profileDB.setUserName(profile.getUserName());
 
     }
+
+
 
     @Override
     public Profile getProfileByUsername(String userName) throws ProfileNotFoundException {

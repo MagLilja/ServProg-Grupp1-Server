@@ -5,7 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
+/**
+ * Model class for Profile
+ * with JPA bindings
+ *
+ * @author Magnus Lilja
+ * @author Andreas Karlsson
+ */
 @Entity
 public class Profile {
     @Id

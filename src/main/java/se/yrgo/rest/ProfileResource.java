@@ -19,6 +19,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+import static javax.ws.rs.core.Response.status;
+
 /**
  * REST resource class for a social media profile
  *
@@ -78,7 +80,7 @@ public class ProfileResource {
             return Response.ok(result).build();
         } catch (ProfileNotFoundException e) {
             e.printStackTrace();
-            return Response.status(404).build();
+            return status(404).build();
         }
 
     }
@@ -97,7 +99,7 @@ public class ProfileResource {
             return Response.ok(profileByUsername).build();
         } catch (ProfileNotFoundException e) {
             e.printStackTrace();
-            return Response.status(404).build();
+            return status(404).build();
         }
     }
 
@@ -112,15 +114,15 @@ public class ProfileResource {
     @POST
     public Response createProfile(Profile newProfile) {
         if (newProfile.getLastName() == null || newProfile.getFirstName() == null || newProfile.getUserName() == null) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Status: 400 Bad Request - Required Fields Missing").build();
+            return status(Response.Status.BAD_REQUEST).entity("Status: 400 Bad Request - Required Fields Missing").build();
         }
         try {
             service.registerProfile(newProfile);
         } catch (ProfileUserNameAlreadyExistsException e) {
             e.printStackTrace();
-            return Response.status(Response.Status.BAD_REQUEST).entity("Status: 400 Bad Request - UserName Already In Use.").build();
+            return status(Response.Status.BAD_REQUEST).entity("Status: 400 Bad Request - UserName Already In Use.").build();
         }
-        return Response.status(Response.Status.ACCEPTED).entity(newProfile).build();
+        return status(Response.Status.ACCEPTED).entity(newProfile).build();
     }
 
     /**
@@ -131,7 +133,6 @@ public class ProfileResource {
     @DELETE
     @Path("{id}")
     public void deleteProfileById(@PathParam("id") int id) {
-
         service.deleteProfileById(id);
     }
 
@@ -141,10 +142,18 @@ public class ProfileResource {
         // TODO
         try {
             service.updateProfile(id, profile);
-        } catch (ProfileNotFoundException e) {
-            e.printStackTrace();
+            return status(Response.Status.ACCEPTED)
+                    .entity(service.getById(id))
+                    .build();
         }
-        return Response.status(Response.Status.ACCEPTED).entity("ID " + id + " updated.").build();
+//        catch (ProfileUserNameAlreadyExistsException e) {
+//            e.printStackTrace();
+//            return status(Response.Status.BAD_REQUEST).entity("Status: 400 Bad Request - UserName Already In Use.").build();
+//        }
+        catch (ProfileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
