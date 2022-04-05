@@ -138,6 +138,12 @@ public class ProfileResource {
         service.deleteProfileById(id);
     }
 
+    /**
+     * PUT resource to update a profile
+     * @param id of profile to edit
+     * @param profile with updated values
+     * @returns a response with the updated profile and status code
+     */
     @PUT
     @Path("{id}")
     public Response updateProfile(@PathParam("id") int id, Profile profile) {

@@ -8,7 +8,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
 
-/**
+/** Class implementing the ProfileManagementService interface.
  * @author - Magnus Lilja
  */
 @Stateless
