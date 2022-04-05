@@ -42,11 +42,11 @@ public class ProfileResource {
     /**
      * The base GET resource.
      *
-     * @return a list of all profiles in the database
+     * @return a response with all profiles in the database
      */
     @GET
-    public List<Profile> getAllProfiles() {
-        return service.getAllProfiles();
+    public Response getAllProfiles() {
+        return status(200).entity(service.getAllProfiles()).build();
     }
 
     /**
@@ -57,13 +57,14 @@ public class ProfileResource {
      *
      * @param firstName - Query parameter from the URI
      * @param lastName  - Query parameter from the URI
-     * @return a list of profiles with first- and/or lastnames containing the search params
+     * @return a response with profiles with first- and/or lastnames containing the search params
      */
     @GET
     @Path("/search")
-    public List<Profile> getProfilesByQuery(@QueryParam("firstname") String firstName,
+    public Response getProfilesByQuery(@QueryParam("firstname") String firstName,
                                             @QueryParam("lastname") String lastName) {
-        return service.getProfilesByQuery(firstName, lastName);
+        List<Profile> profilesByQuery = service.getProfilesByQuery(firstName, lastName);
+        return status(200).entity(profilesByQuery).build();
     }
 
     /**
@@ -80,7 +81,8 @@ public class ProfileResource {
             return Response.ok(result).build();
         } catch (ProfileNotFoundException e) {
             e.printStackTrace();
-            return status(404).build();
+            return status(Response.Status.NOT_FOUND).entity("Status: 404 Not Found.").build();
+
         }
 
     }
@@ -139,21 +141,15 @@ public class ProfileResource {
     @PUT
     @Path("{id}")
     public Response updateProfile(@PathParam("id") int id, Profile profile) {
-        // TODO
         try {
             service.updateProfile(id, profile);
             return status(Response.Status.ACCEPTED)
                     .entity(service.getById(id))
                     .build();
         }
-//        catch (ProfileUserNameAlreadyExistsException e) {
-//            e.printStackTrace();
-//            return status(Response.Status.BAD_REQUEST).entity("Status: 400 Bad Request - UserName Already In Use.").build();
-//        }
         catch (ProfileNotFoundException e) {
             e.printStackTrace();
             return null;
         }
     }
-
 }
