@@ -20,7 +20,7 @@ If running on wildfly in docker see documentation here:
 https://github.com/MagLilja/WildFly-MySQL-DockerCompose
 
 
-## Deploy to wildfly
+## Deploy war file to wildfly
 
 Enter credentials for your wildfly server in the maven POM.xml
 

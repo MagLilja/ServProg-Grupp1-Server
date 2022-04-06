@@ -18,9 +18,15 @@ public class ProfileManagementImplementation implements ProfileManagementService
     @Inject
     private ProfileDataAccess dao;
 
+
+    /**
+     * Method to call for the dao to register a new profile.
+     * Checks whether the profile's username is unique.
+     * @throws ProfileUserNameAlreadyExistsException if the username is already taken.
+     */
     @Override
     public void registerProfile(Profile profile) throws ProfileUserNameAlreadyExistsException {
-        if (validator.validateUserName(profile)) {
+        if (validator.isInvalidUsername(profile)) {
             throw new ProfileUserNameAlreadyExistsException();
         } else {
             dao.insert(profile);
