@@ -6,12 +6,43 @@ Provides a simple server service with REST end points for accessing a "Profile" 
 
 ## Building from the repo
 
-- id
-- förnamn
-- efternamn
-- användarnamn
-- födelsedatum
-- registreringsdatum
+Build using Maven
+
+````
+mvn build
+````
+
+## Configure wildfly and database
+
+if running on wildfly in docker see documentation here:
+
+https://github.com/MagLilja/WildFly-MySQL-DockerCompose
+
+
+## Deploy to wildfly
+
+Enter credentials for your wildfly server in the maven POM.xml
+
+````
+<plugin>
+        <groupId>org.wildfly.plugins</groupId>
+        <artifactId>wildfly-maven-plugin</artifactId>
+        <version>2.1.0.Final</version>
+        <configuration>
+            <hostname>xxx.xx.xxx.xx</hostname>
+            <port>xxxx</port>
+            <username>xxxx</username>
+            <password>*******</password>
+        </configuration>
+    </plugin>
+````
+
+use Maven to deploy to wildfly
+
+````
+mvn wildfly:deploy -f pom.xml
+````
+
 
 ## API 
 
