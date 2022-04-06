@@ -8,7 +8,9 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
 
-/** Class implementing the ProfileManagementService interface.
+/**
+ * Class implementing the ProfileManagementService interface.
+ *
  * @author - Magnus Lilja
  */
 @Stateless
@@ -21,14 +23,12 @@ public class ProfileManagementImplementation implements ProfileManagementService
 
     /**
      * Method to call for the dao to register a new profile.
-     * Checks whether the profile's username is unique.
-     * @throws ProfileUserNameAlreadyExistsException if the username is already taken.
+     * Checks whether the profile's username is valid.
+     *
      */
     @Override
     public void registerProfile(Profile profile) throws ProfileUserNameAlreadyExistsException {
-        if (validator.isInvalidUsername(profile)) {
-            throw new ProfileUserNameAlreadyExistsException();
-        } else {
+        if (validator.isValidUsername(profile)) {
             dao.insert(profile);
         }
     }

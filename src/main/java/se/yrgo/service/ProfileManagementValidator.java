@@ -15,13 +15,18 @@ public class ProfileManagementValidator {
     }
 
     /**
-     *
      * @param profile
-     * @returns true if a profiles username already exists in the database.
+     * @returns true if a profiles username is not already used in the database.
+     * @throws ProfileUserNameAlreadyExistsException if the username is already taken.
      */
-    public boolean isInvalidUsername(Profile profile) {
-        return profileManagementImplementation.getDao().findAll().stream()
-                .map(p -> p.getUserName())
-                .anyMatch(username -> username.equals(profile.getUserName()));
+    public boolean isValidUsername(Profile profile) throws ProfileUserNameAlreadyExistsException {
+        if (profileManagementImplementation.getDao().findAll().stream()
+                .map(Profile::getUserName)
+                .anyMatch(username -> username.equals(profile.getUserName()))) {
+            throw new ProfileUserNameAlreadyExistsException();
+        }
+        else {
+            return true;
+        }
     }
 }
