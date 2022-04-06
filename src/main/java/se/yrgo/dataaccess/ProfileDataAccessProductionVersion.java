@@ -31,7 +31,7 @@ public class ProfileDataAccessProductionVersion implements ProfileDataAccess {
     /**
      * Method to query the database for all profiles.
      *
-     * @returns a list of profiles
+     * @return a list of profiles
      */
     @Override
     public List<Profile> findAll() {
@@ -43,8 +43,8 @@ public class ProfileDataAccessProductionVersion implements ProfileDataAccess {
      * Method to query the database for a user with a specified ID
      *
      * @param id of the profile query
-     * @throws ProfileNotFoundException
-     * @returns a mathing profile or
+     * @throw ProfileNotFoundException
+     * @return a mathing profile or
      */
     @Override
     public Profile findById(int id) throws ProfileNotFoundException {
@@ -63,7 +63,7 @@ public class ProfileDataAccessProductionVersion implements ProfileDataAccess {
      *
      * @param firstName
      * @param lastName
-     * @returns a list of matching profiles. The returned profiles must match BOTH the firstname and the lastname
+     * @return a list of matching profiles. The returned profiles must match BOTH the firstname and the lastname
      */
     @Override
     public List<Profile> getProfilesByQuery(String firstName, String lastName) {
@@ -120,7 +120,7 @@ public class ProfileDataAccessProductionVersion implements ProfileDataAccess {
     /**
      * Method to query the database for a profile by username
      * @param userName to query for
-     * @returns a profile matching the query
+     * @return a profile matching the query
      * @throws ProfileNotFoundException if no matching profile exists.
      */
     @Override

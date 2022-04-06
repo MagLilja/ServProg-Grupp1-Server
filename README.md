@@ -1,6 +1,7 @@
 # Profile management server application.
 
-Provides a simple server service with REST end points for accessing a "Profile" from a MySQL-database using JPA meant to be deployed and run on a Wildfly application server. 
+Provides a simple server service with REST end points for accessing a "Profile" from a
+MySQL-database using JPA meant to be deployed and run on a Wildfly application server. 
 
 
 
@@ -14,7 +15,7 @@ mvn build
 
 ## Configure wildfly and database
 
-if running on wildfly in docker see documentation here:
+If running on wildfly in docker see documentation here:
 
 https://github.com/MagLilja/WildFly-MySQL-DockerCompose
 
@@ -37,7 +38,7 @@ Enter credentials for your wildfly server in the maven POM.xml
     </plugin>
 ````
 
-use Maven to deploy to wildfly
+Use Maven to deploy to wildfly
 
 ````
 mvn wildfly:deploy -f pom.xml
@@ -46,11 +47,11 @@ mvn wildfly:deploy -f pom.xml
 
 ## API 
 
-The API has X end points, all producing or consuming JSON data.
+The API has 7 end points, all producing or consuming JSON data.
 
 ### @GET api/profiles
 
-returns a response with a list of all profiles. 
+Returns a response with a list of all profiles. 
 
 ### @GET api/profiles/search?firstname=<searchword>&lastname=<searchword>
 

@@ -51,9 +51,9 @@ public class ProfileResource {
 
     /**
      * The search GET resource.
-     * /search?firstname=firstName
-     * or /search?lastname=lastName
-     * or /search?lastname=lastName&firstname=firstName
+     * /search?firstname=firstName or
+     * /search?lastname=lastName or
+     * /search?lastname=lastName&firstname=firstName
      *
      * @param firstName - Query parameter from the URI
      * @param lastName  - Query parameter from the URI
@@ -142,7 +142,7 @@ public class ProfileResource {
      * PUT resource to update a profile
      * @param id of profile to edit
      * @param profile with updated values
-     * @returns a response with the updated profile and status code
+     * @return a response with the updated profile and status code
      */
     @PUT
     @Path("{id}")
