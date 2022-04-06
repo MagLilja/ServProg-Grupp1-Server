@@ -107,7 +107,7 @@ public class ProfileResource {
 
     /**
      * POST resource for creating a new profile in the database
-     * Accepts a JSON string matching the Profile class
+     * Accepts a JSON data matching the Profile class
      * If lastname, firstname or username is missing it returns a BAD REQUEST
      *
      * @param newProfile - the profile to be created

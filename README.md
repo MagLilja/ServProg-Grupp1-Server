@@ -1,8 +1,10 @@
-# ServProg-Group1
+# Profile management server application.
 
-Profiler/Användare
+Provides a simple server service with REST end points for accessing a "Profile" from a MySQL-database using JPA meant to be deployed and run on a Wildfly application server. 
 
-## Profil
+
+
+## Building from the repo
 
 - id
 - förnamn
@@ -11,29 +13,38 @@ Profiler/Användare
 - födelsedatum
 - registreringsdatum
 
-## API/REST
+## API 
 
-### @GET
-(samlingar)
-- Alla profiler
-- Alla profiler på förnamn
-- Alla profiler på efternamn
-- Alla profiler på fulla namn
-- Alla profiler på födelseår
-- Alla profiler på registreringsdatum
+The API has X end points, all producing or consuming JSON data.
 
-(Unika)
-- Profil med id
-- Profil med användarnamn
+### @GET api/profiles
 
-### @POST
+returns a response with a list of all profiles. 
 
-- Lägg till en unik profil
+### @GET api/profiles/search?firstname=<searchword>&lastname=<searchword>
 
-### @PUT
+Query all profiles for matching profiles. Takes one or two params, firstname and/or lastname. 
+Returns a response with a list of all matching profiles.
 
-- Uppdatera en unik profil
+If both parameters are present the result will be profiles that match both of the queries. 
 
-### @DELETE
+### @GET api/profiles/{id}
 
-- Ta bort en unik profil
+Returns a response with a profile matching the id. 
+
+### @GET api/profiles/username/{username}
+
+Returns a response with a profile matching the username.
+
+### @POST api/profiles/
+
+Consumes a profile in the form of JSON data, on success it returns the same profile. 
+
+### @DELETE api/profiles/{id}
+
+Removes a profile from the api.
+
+### @PUT api/profiles/{id}
+
+Resource to update a profile with matching id.
+Returns a response with the updated profile on success and status code.
